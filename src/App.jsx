@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingScreen from './components/LoadingScreen';
 import { BrowserRouter, Outlet, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { AllTierData } from './Data/index';
@@ -178,11 +179,7 @@ function App() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div className="h-screen w-full bg-[#0E0E0E] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

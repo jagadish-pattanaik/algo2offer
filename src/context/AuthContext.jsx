@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import LoadingScreen from "../components/LoadingScreen";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, firestore } from "../firebase/firebase";
@@ -7,6 +8,9 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  // Show the fancy loading screen only on the very first open of the tab,
+  // not on every refresh. sessionStorage is cleared when the tab is closed.
+  const [showSplash] = useState(() => !sessionStorage.getItem('a2o_loaded'));
 
   const logout = async () => {
     try {
@@ -40,6 +44,8 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       }
       setLoading(false);
+      // Mark that we've already shown the splash in this tab session
+      sessionStorage.setItem('a2o_loaded', '1');
     });
 
     return () => unsubscribe();
@@ -47,7 +53,11 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, loading, logout, setUser }}>
-      {!loading && children}
+      {loading
+        ? (showSplash
+            ? <LoadingScreen />
+            : <div style={{ position: 'fixed', inset: 0, backgroundColor: '#0E0E0E' }} />)
+        : children}
     </AuthContext.Provider>
   );
 };

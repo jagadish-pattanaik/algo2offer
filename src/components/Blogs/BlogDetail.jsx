@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc, arrayUnion, arrayRemove, collection, addDoc, on
 import { firestore } from '../../firebase/firebase';
 import { useAuth } from '../../context/AuthContext';
 import MDEditor from '@uiw/react-md-editor';
+import Spinner from '../Spinner';
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -83,9 +84,8 @@ export default function BlogDetail() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center p-20 text-[#888]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#48D2A0] mb-4"></div>
-        <p>Loading blog...</p>
+      <div className="flex flex-col items-center justify-center p-20">
+        <Spinner size={48} />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 import { Link } from 'react-router-dom';
+import Spinner from '../Spinner';
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -68,9 +69,8 @@ export default function Blogs() {
       </div>
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center h-64 text-neutral-400">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#48D2A0] mb-4"></div>
-            <p className="text-sm font-medium">Loading blogs...</p>
+        <div className="flex flex-col items-center justify-center h-64 gap-4">
+          <Spinner size={48} />
         </div>
       ) : blogs.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-64 text-neutral-500 bg-[#141414] rounded-xl border border-[#262626] shadow-sm">
