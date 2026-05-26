@@ -19,36 +19,20 @@ export default function Spinner({ size = 48 }) {
       `}</style>
 
       <div
-        style={{ width: size, height: size, position: 'relative', flexShrink: 0 }}
+        className="relative flex-shrink-0"
+        style={{ width: size, height: size }}
       >
-        {/* Orbiting dot */}
         <div
+          className="absolute top-1/2 left-1/2 rounded-full bg-white/95 origin-center [box-shadow:0_0_8px_rgba(255,255,255,0.8)]"
           style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
             width: dotSize,
             height: dotSize,
             marginTop: dotOffset,
             marginLeft: dotOffset,
-            borderRadius: '50%',
-            backgroundColor: 'rgba(255,255,255,0.95)',
-            boxShadow: '0 0 8px rgba(255,255,255,0.8)',
-            animation: `sp-orbit 2.2s linear infinite`,
-            transformOrigin: 'center center',
+            animation: 'sp-orbit 2.2s linear infinite',
           }}
         />
-        {/* Circle */}
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            border: '2.5px solid white',
-            backgroundColor: 'transparent',
-            animation: 'sp-glow 2.5s ease-in-out infinite',
-          }}
-        />
+        <div className="w-full h-full rounded-full border-[2.5px] border-white bg-transparent [animation:sp-glow_2.5s_ease-in-out_infinite]" />
       </div>
     </>
   );
