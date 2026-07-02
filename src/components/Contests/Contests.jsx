@@ -652,338 +652,340 @@ export default function Contests() {
 
   // ── Render ───────────────────────────────────────────────────────────────
   return (
-    <div style={{ display: 'flex', gap: 20, width: '100%', alignItems: 'flex-start', minHeight: '100%' }}>
+    <>
+      <div className="animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out" style={{ display: 'flex', gap: 20, width: '100%', alignItems: 'flex-start', minHeight: '100%' }}>
 
-      {/* ── LEFT: Contest list ──────────────────────────────────────────── */}
-      <section
-        className="text-white relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-6"
-        style={{
-          flex: 1,
-          minWidth: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 28,
-          paddingBottom: 80,
-          paddingTop: 24,
-          transition: 'all 320ms cubic-bezier(0.4,0,0.2,1)',
-        }}
-      >
-        {/* HEADER */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tighter mb-1">Contests</h1>
-            <p className="text-[#888] text-sm">Challenge yourself in live contests and stand above the rest.</p>
+        {/* ── LEFT: Contest list ──────────────────────────────────────────── */}
+        <section
+          className="text-white relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-6"
+          style={{
+            flex: 1,
+            minWidth: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 28,
+            paddingBottom: 80,
+            paddingTop: 24,
+            transition: 'all 320ms cubic-bezier(0.4,0,0.2,1)',
+          }}
+        >
+          {/* HEADER */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tighter mb-1">Contests</h1>
+              <p className="text-[#888] text-sm">Challenge yourself in live contests and stand above the rest.</p>
+            </div>
+            {!loading && (
+              <div className="flex gap-2 flex-wrap">
+                {['live', 'not_started', 'ended'].map(s => {
+                  const count = contests.filter(c => getStatus(c.startTime, c.endTime) === s).length;
+                  const cfg = STATUS_CONFIG[s];
+                  return (
+                    <span key={s} className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full border ${cfg.bg} ${cfg.border} ${cfg.text}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
+                      {count} {cfg.label}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
-          {!loading && (
+
+          {/* SEARCH + FILTER BAR */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <div className="relative w-full sm:flex-1 sm:max-w-xs">
+              <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444]" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+              </svg>
+              <input
+                id="contest-search"
+                type="text"
+                value={search}
+                onChange={handleSearch}
+                placeholder="Search by Contest ID or name…"
+                className="w-full bg-[#141516] border border-[#2a2a2a] rounded-xl py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-[#444] focus:outline-none focus:border-[#48D2A0]/50 transition-all"
+              />
+              {search && (
+                <button onClick={() => { setSearch(''); setPage(1); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#555] hover:text-white transition-colors">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                </button>
+              )}
+            </div>
             <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => { setStatusFilter(null); setPage(1); }}
+                className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border ${statusFilter === null
+                  ? 'bg-white text-black border-white shadow-[0_0_14px_rgba(255,255,255,0.18)]'
+                  : 'bg-[#141516] border-[#2a2a2a] text-[#777] hover:text-white hover:border-[#444]'
+                  }`}
+              >
+                All
+              </button>
               {['live', 'not_started', 'ended'].map(s => {
-                const count = contests.filter(c => getStatus(c.startTime, c.endTime) === s).length;
                 const cfg = STATUS_CONFIG[s];
+                const isActive = statusFilter === s;
                 return (
-                  <span key={s} className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full border ${cfg.bg} ${cfg.border} ${cfg.text}`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
-                    {count} {cfg.label}
-                  </span>
+                  <button
+                    key={s}
+                    onClick={() => handleStatusFilter(s)}
+                    className={`whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border ${isActive
+                      ? `${cfg.bg} ${cfg.border} ${cfg.text} shadow-[0_0_14px_rgba(0,0,0,0.3)]`
+                      : 'bg-[#141516] border-[#2a2a2a] text-[#777] hover:text-white hover:border-[#444]'
+                      }`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${isActive ? cfg.dot : 'bg-[#555]'}`} />
+                    {cfg.label}
+                  </button>
                 );
               })}
             </div>
-          )}
-        </div>
-
-        {/* SEARCH + FILTER BAR */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <div className="relative w-full sm:flex-1 sm:max-w-xs">
-            <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444]" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
-            </svg>
-            <input
-              id="contest-search"
-              type="text"
-              value={search}
-              onChange={handleSearch}
-              placeholder="Search by Contest ID or name…"
-              className="w-full bg-[#141516] border border-[#2a2a2a] rounded-xl py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-[#444] focus:outline-none focus:border-[#48D2A0]/50 transition-all"
-            />
-            {search && (
-              <button onClick={() => { setSearch(''); setPage(1); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#555] hover:text-white transition-colors">
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-              </button>
-            )}
           </div>
-          <div className="flex gap-2 flex-wrap">
-            <button
-              onClick={() => { setStatusFilter(null); setPage(1); }}
-              className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border ${statusFilter === null
-                ? 'bg-white text-black border-white shadow-[0_0_14px_rgba(255,255,255,0.18)]'
-                : 'bg-[#141516] border-[#2a2a2a] text-[#777] hover:text-white hover:border-[#444]'
-                }`}
-            >
-              All
-            </button>
-            {['live', 'not_started', 'ended'].map(s => {
-              const cfg = STATUS_CONFIG[s];
-              const isActive = statusFilter === s;
-              return (
-                <button
-                  key={s}
-                  onClick={() => handleStatusFilter(s)}
-                  className={`whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border ${isActive
-                    ? `${cfg.bg} ${cfg.border} ${cfg.text} shadow-[0_0_14px_rgba(0,0,0,0.3)]`
-                    : 'bg-[#141516] border-[#2a2a2a] text-[#777] hover:text-white hover:border-[#444]'
-                    }`}
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? cfg.dot : 'bg-[#555]'}`} />
-                  {cfg.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* MATRIX TABLE */}
-        <div className="rounded-[22px] bg-[#1a1c1d] border border-[#2a2a2a] shadow-2xl overflow-hidden">
-          {/* DESKTOP */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full text-left border-collapse" style={{ minWidth: 720 }}>
-              <thead>
-                <tr className="bg-[#141516]/60 border-b border-[#2a2a2a] text-[10px] font-black text-[#444] uppercase tracking-[0.17em]">
-                  <th className="px-5 py-4">#</th>
-                  <th className="px-5 py-4">Contest Name</th>
-                  <th className="px-5 py-4">Contest ID</th>
-                  <th className="px-5 py-4">Start</th>
-                  <th className="px-5 py-4">Duration</th>
-                  <th className="px-5 py-4">Status</th>
-                  <th className="px-5 py-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#2a2a2a]/40">
-                {loading
-                  ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
-                  : paginated.length > 0
-                    ? paginated.map((c, i) => {
-                      const status = getStatus(c.startTime, c.endTime);
-                      const isLive = status === 'live';
-                      const isSelected = selectedContest?.id === c.id && panelOpen;
-                      return (
-                        <tr
-                          key={c.id}
-                          className={`group transition-all duration-200 ${isSelected
-                            ? 'bg-[#48D2A0]/6'
-                            : isLive
-                              ? 'hover:bg-[#48D2A0]/4'
-                              : 'hover:bg-[#1f2022]'
-                            }`}
-                          style={isSelected ? { borderLeft: '2px solid #48D2A0' } : {}}
-                        >
-                          <td className="px-5 py-4 text-[#555] text-xs font-mono">
-                            {(safePage - 1) * PAGE_SIZE + i + 1}
-                          </td>
-                          <td className="px-5 py-4">
-                            <div>
-                              <span className="text-sm font-semibold text-[#ccc] group-hover:text-white transition-colors">
-                                {c.title || '—'}
+          {/* MATRIX TABLE */}
+          <div className="rounded-[22px] bg-[#1a1c1d] border border-[#2a2a2a] shadow-2xl overflow-hidden">
+            {/* DESKTOP */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse" style={{ minWidth: 720 }}>
+                <thead>
+                  <tr className="bg-[#141516]/60 border-b border-[#2a2a2a] text-[10px] font-black text-[#444] uppercase tracking-[0.17em]">
+                    <th className="px-5 py-4">#</th>
+                    <th className="px-5 py-4">Contest Name</th>
+                    <th className="px-5 py-4">Contest ID</th>
+                    <th className="px-5 py-4">Start</th>
+                    <th className="px-5 py-4">Duration</th>
+                    <th className="px-5 py-4">Status</th>
+                    <th className="px-5 py-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#2a2a2a]/40">
+                  {loading
+                    ? Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)
+                    : paginated.length > 0
+                      ? paginated.map((c, i) => {
+                        const status = getStatus(c.startTime, c.endTime);
+                        const isLive = status === 'live';
+                        const isSelected = selectedContest?.id === c.id && panelOpen;
+                        return (
+                          <tr
+                            key={c.id}
+                            className={`group transition-all duration-200 ${isSelected
+                              ? 'bg-[#48D2A0]/6'
+                              : isLive
+                                ? 'hover:bg-[#48D2A0]/4'
+                                : 'hover:bg-[#1f2022]'
+                              }`}
+                            style={isSelected ? { borderLeft: '2px solid #48D2A0' } : {}}
+                          >
+                            <td className="px-5 py-4 text-[#555] text-xs font-mono">
+                              {(safePage - 1) * PAGE_SIZE + i + 1}
+                            </td>
+                            <td className="px-5 py-4">
+                              <div>
+                                <span className="text-sm font-semibold text-[#ccc] group-hover:text-white transition-colors">
+                                  {c.title || '—'}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-5 py-4">
+                              {c.contestId
+                                ? <span className="text-xs font-mono font-bold text-[#48D2A0] bg-[#48D2A0]/8 border border-[#48D2A0]/25 px-2.5 py-1 rounded-lg">#{c.contestId}</span>
+                                : <span className="text-[#555] text-xs">—</span>
+                              }
+                            </td>
+                            <td className="px-5 py-4">
+                              <span className="text-xs text-[#888]">{formatDateTime(c.startTime)}</span>
+                            </td>
+                            <td className="px-5 py-4">
+                              <span className="text-xs font-mono font-bold text-[#ccc] bg-[#111] border border-[#2a2a2a] px-2.5 py-1 rounded-lg">
+                                {getDuration(c.startTime, c.endTime)}
                               </span>
-                            </div>
-                          </td>
-                          <td className="px-5 py-4">
-                            {c.contestId
-                              ? <span className="text-xs font-mono font-bold text-[#48D2A0] bg-[#48D2A0]/8 border border-[#48D2A0]/25 px-2.5 py-1 rounded-lg">#{c.contestId}</span>
-                              : <span className="text-[#555] text-xs">—</span>
-                            }
-                          </td>
-                          <td className="px-5 py-4">
-                            <span className="text-xs text-[#888]">{formatDateTime(c.startTime)}</span>
-                          </td>
-                          <td className="px-5 py-4">
-                            <span className="text-xs font-mono font-bold text-[#ccc] bg-[#111] border border-[#2a2a2a] px-2.5 py-1 rounded-lg">
-                              {getDuration(c.startTime, c.endTime)}
-                            </span>
-                          </td>
-                          <td className="px-5 py-4">
-                            <StatusBadge status={status} />
-                          </td>
-                          <td className="px-5 py-4">
-                            <div className="flex items-center justify-end gap-2">
-                              {/* Board button */}
-                              <button
-                                onClick={() => handleLeaderboardClick(c)}
-                                title="View Leaderboard"
-                                className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-3 py-2 rounded-xl transition-all border ${isSelected
-                                  ? 'bg-[#48D2A0]/15 text-[#48D2A0] border-[#48D2A0]/40 shadow-[0_0_10px_rgba(72,210,160,0.15)]'
-                                  : 'text-[#888] bg-[#111] border-[#2a2a2a] hover:text-white hover:border-[#444]'
-                                  }`}
-                              >
-                                <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                  <path d="M18 20V10M12 20V4M6 20v-6" />
-                                </svg>
-                                Board
-                              </button>
-                              {/* Participate */}
-                              <a
-                                href={c.link || '#'}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-3.5 py-2 rounded-xl transition-all ${isLive
-                                  ? 'bg-[#48D2A0] text-black hover:bg-[#5ee0ad] shadow-[0_0_12px_rgba(72,210,160,0.25)]'
-                                  : 'bg-[#2a2a2a] text-white hover:bg-[#333]'
-                                  }`}
-                              >
-                                {isLive ? (
-                                  <><span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />Join Live</>
-                                ) : (
-                                  <><svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>Participate</>
-                                )}
-                              </a>
-                            </div>
+                            </td>
+                            <td className="px-5 py-4">
+                              <StatusBadge status={status} />
+                            </td>
+                            <td className="px-5 py-4">
+                              <div className="flex items-center justify-end gap-2">
+                                {/* Board button */}
+                                <button
+                                  onClick={() => handleLeaderboardClick(c)}
+                                  title="View Leaderboard"
+                                  className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-3 py-2 rounded-xl transition-all border ${isSelected
+                                    ? 'bg-[#48D2A0]/15 text-[#48D2A0] border-[#48D2A0]/40 shadow-[0_0_10px_rgba(72,210,160,0.15)]'
+                                    : 'text-[#888] bg-[#111] border-[#2a2a2a] hover:text-white hover:border-[#444]'
+                                    }`}
+                                >
+                                  <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                    <path d="M18 20V10M12 20V4M6 20v-6" />
+                                  </svg>
+                                  Board
+                                </button>
+                                {/* Participate */}
+                                <a
+                                  href={c.link || '#'}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-3.5 py-2 rounded-xl transition-all ${isLive
+                                    ? 'bg-[#48D2A0] text-black hover:bg-[#5ee0ad] shadow-[0_0_12px_rgba(72,210,160,0.25)]'
+                                    : 'bg-[#2a2a2a] text-white hover:bg-[#333]'
+                                    }`}
+                                >
+                                  {isLive ? (
+                                    <><span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />Join Live</>
+                                  ) : (
+                                    <><svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>Participate</>
+                                  )}
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })
+                      : (
+                        <tr>
+                          <td colSpan={7} className="px-6 py-20 text-center text-[#555]">
+                            <svg className="mx-auto mb-3 text-[#333]" width="36" height="36" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+                            </svg>
+                            <p className="text-sm">No contests match <span className="text-white font-medium">"{search}"</span></p>
                           </td>
                         </tr>
-                      );
-                    })
-                    : (
-                      <tr>
-                        <td colSpan={7} className="px-6 py-20 text-center text-[#555]">
-                          <svg className="mx-auto mb-3 text-[#333]" width="36" height="36" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
-                          </svg>
-                          <p className="text-sm">No contests match <span className="text-white font-medium">"{search}"</span></p>
-                        </td>
-                      </tr>
-                    )
-                }
-              </tbody>
-            </table>
-          </div>
+                      )
+                  }
+                </tbody>
+              </table>
+            </div>
 
-          {/* MOBILE CARD VIEW */}
-          <div className="md:hidden flex flex-col divide-y divide-[#2a2a2a]/50">
-            {loading
-              ? Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="p-5 flex flex-col gap-3 animate-pulse">
-                  <div className="h-3 rounded-full bg-[#2a2a2a] w-3/4" />
-                  <div className="h-2.5 rounded-full bg-[#2a2a2a] w-1/2" />
-                  <div className="h-2.5 rounded-full bg-[#2a2a2a] w-2/3" />
-                </div>
-              ))
-              : paginated.length > 0
-                ? paginated.map((c) => {
-                  const status = getStatus(c.startTime, c.endTime);
-                  const isLive = status === 'live';
-                  const isSelected = selectedContest?.id === c.id && panelOpen;
-                  return (
-                    <div
-                      key={c.id}
-                      className="p-5 flex flex-col gap-3 transition-all"
-                      style={{
-                        background: isSelected ? 'rgba(72,210,160,0.05)' : isLive ? 'rgba(72,210,160,0.03)' : 'transparent',
-                        borderLeft: isSelected ? '2px solid #48D2A0' : '2px solid transparent',
-                      }}
-                    >
-                      <div className="flex justify-between items-start gap-3">
-                        <div className="flex flex-col gap-1 flex-1 min-w-0">
-                          {c.contestId && <span className="text-[10px] font-mono font-bold text-[#48D2A0]">#{c.contestId}</span>}
-                          <span className="text-[15px] font-bold text-white leading-snug">{c.title || '—'}</span>
-                        </div>
-                        <StatusBadge status={status} />
-                      </div>
-                      <div className="grid grid-cols-2 gap-2 text-xs text-[#888]">
-                        <div>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-[#555] block mb-0.5">Start</span>
-                          {formatDateTime(c.startTime)}
-                        </div>
-                        <div>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-[#555] block mb-0.5">Duration</span>
-                          <span className="font-mono font-bold text-[#ccc]">{getDuration(c.startTime, c.endTime)}</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 pt-1">
-                        <button
-                          onClick={() => handleLeaderboardClick(c)}
-                          className={`flex-1 text-center text-[10px] font-bold py-2.5 rounded-xl active:scale-95 transition-all border ${isSelected
-                            ? 'bg-[#48D2A0]/15 text-[#48D2A0] border-[#48D2A0]/40'
-                            : 'text-[#888] bg-[#141516] border-[#2a2a2a] hover:text-white'
-                            }`}
-                        >
-                          Leaderboard
-                        </button>
-                        <a
-                          href={c.link || '#'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex-1 text-center text-[10px] font-bold py-2.5 rounded-xl active:scale-95 transition-transform ${isLive ? 'bg-[#48D2A0] text-black' : 'bg-[#2a2a2a] text-white'}`}
-                        >
-                          {isLive ? (
-                            <>
-                              <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse inline-block mr-1.5" />
-                              Join Live
-                            </>
-                          ) : (
-                            <>
-                              <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" className="inline-block mr-1.5 -mt-0.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                              Participate
-                            </>
-                          )}
-                        </a>
-                      </div>
-                    </div>
-                  );
-                })
-                : (
-                  <div className="p-10 text-center text-[#555] text-sm">
-                    No contests match "{search}"
+            {/* MOBILE CARD VIEW */}
+            <div className="md:hidden flex flex-col divide-y divide-[#2a2a2a]/50">
+              {loading
+                ? Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="p-5 flex flex-col gap-3 animate-pulse">
+                    <div className="h-3 rounded-full bg-[#2a2a2a] w-3/4" />
+                    <div className="h-2.5 rounded-full bg-[#2a2a2a] w-1/2" />
+                    <div className="h-2.5 rounded-full bg-[#2a2a2a] w-2/3" />
                   </div>
-                )
-            }
-          </div>
-        </div>
-
-        {/* PAGINATION */}
-        {!loading && totalPages > 1 && (
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <span className="text-xs text-[#555]">
-              Showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of {filtered.length}
-            </span>
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => setPage(p => Math.max(1, p - 1))}
-                disabled={safePage === 1}
-                className="px-3 py-2 rounded-xl text-xs font-bold bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-              >
-                ← Prev
-              </button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
-                <button
-                  key={p}
-                  onClick={() => setPage(p)}
-                  className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${p === safePage
-                    ? 'bg-[#48D2A0] text-black shadow-[0_0_10px_rgba(72,210,160,0.3)]'
-                    : 'bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444]'
-                    }`}
-                >
-                  {p}
-                </button>
-              ))}
-              <button
-                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                disabled={safePage === totalPages}
-                className="px-3 py-2 rounded-xl text-xs font-bold bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-              >
-                Next →
-              </button>
+                ))
+                : paginated.length > 0
+                  ? paginated.map((c) => {
+                    const status = getStatus(c.startTime, c.endTime);
+                    const isLive = status === 'live';
+                    const isSelected = selectedContest?.id === c.id && panelOpen;
+                    return (
+                      <div
+                        key={c.id}
+                        className="p-5 flex flex-col gap-3 transition-all"
+                        style={{
+                          background: isSelected ? 'rgba(72,210,160,0.05)' : isLive ? 'rgba(72,210,160,0.03)' : 'transparent',
+                          borderLeft: isSelected ? '2px solid #48D2A0' : '2px solid transparent',
+                        }}
+                      >
+                        <div className="flex justify-between items-start gap-3">
+                          <div className="flex flex-col gap-1 flex-1 min-w-0">
+                            {c.contestId && <span className="text-[10px] font-mono font-bold text-[#48D2A0]">#{c.contestId}</span>}
+                            <span className="text-[15px] font-bold text-white leading-snug">{c.title || '—'}</span>
+                          </div>
+                          <StatusBadge status={status} />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs text-[#888]">
+                          <div>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-[#555] block mb-0.5">Start</span>
+                            {formatDateTime(c.startTime)}
+                          </div>
+                          <div>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-[#555] block mb-0.5">Duration</span>
+                            <span className="font-mono font-bold text-[#ccc]">{getDuration(c.startTime, c.endTime)}</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-2 pt-1">
+                          <button
+                            onClick={() => handleLeaderboardClick(c)}
+                            className={`flex-1 text-center text-[10px] font-bold py-2.5 rounded-xl active:scale-95 transition-all border ${isSelected
+                              ? 'bg-[#48D2A0]/15 text-[#48D2A0] border-[#48D2A0]/40'
+                              : 'text-[#888] bg-[#141516] border-[#2a2a2a] hover:text-white'
+                              }`}
+                          >
+                            Leaderboard
+                          </button>
+                          <a
+                            href={c.link || '#'}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex-1 text-center text-[10px] font-bold py-2.5 rounded-xl active:scale-95 transition-transform ${isLive ? 'bg-[#48D2A0] text-black' : 'bg-[#2a2a2a] text-white'}`}
+                          >
+                            {isLive ? (
+                              <>
+                                <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse inline-block mr-1.5" />
+                                Join Live
+                              </>
+                            ) : (
+                              <>
+                                <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" className="inline-block mr-1.5 -mt-0.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                                Participate
+                              </>
+                            )}
+                          </a>
+                        </div>
+                      </div>
+                    );
+                  })
+                  : (
+                    <div className="p-10 text-center text-[#555] text-sm">
+                      No contests match "{search}"
+                    </div>
+                  )
+              }
             </div>
           </div>
-        )}
 
-        {/* EMPTY STATE */}
-        {!loading && contests.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-24 text-[#555] rounded-2xl border border-[#2a2a2a] bg-[#1a1a1a]/40">
-            <svg width="52" height="52" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" className="mb-4 text-[#333]">
-              <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-            </svg>
-            <h2 className="text-xl font-bold text-white mb-1">No Contests Yet</h2>
-            <p className="text-sm">Weekly and Bi-weekly contests will appear here soon.</p>
-          </div>
-        )}
-      </section>
+          {/* PAGINATION */}
+          {!loading && totalPages > 1 && (
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <span className="text-xs text-[#555]">
+                Showing {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filtered.length)} of {filtered.length}
+              </span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  disabled={safePage === 1}
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                >
+                  ← Prev
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p)}
+                    className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${p === safePage
+                      ? 'bg-[#48D2A0] text-black shadow-[0_0_10px_rgba(72,210,160,0.3)]'
+                      : 'bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444]'
+                      }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                  disabled={safePage === totalPages}
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                >
+                  Next →
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* EMPTY STATE */}
+          {!loading && contests.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-24 text-[#555] rounded-2xl border border-[#2a2a2a] bg-[#1a1a1a]/40">
+              <svg width="52" height="52" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" className="mb-4 text-[#333]">
+                <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+              </svg>
+              <h2 className="text-xl font-bold text-white mb-1">No Contests Yet</h2>
+              <p className="text-sm">Weekly and Bi-weekly contests will appear here soon.</p>
+            </div>
+          )}
+        </section>
+      </div>
 
       {/* ── RIGHT: Leaderboard panel ─────── */}
       <LeaderboardPanel
@@ -991,6 +993,6 @@ export default function Contests() {
         isOpen={panelOpen}
         onClose={handleClose}
       />
-    </div>
+    </>
   );
 }

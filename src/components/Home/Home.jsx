@@ -11,7 +11,8 @@ const Icons = {
     github: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>,
     leetcode: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.901l-2.609-2.636a5.055 5.055 0 0 0-2.445-1.337l2.467-2.503c.516-.514.498-1.366-.037-1.901-.535-.535-1.387-.552-1.902-.038l-10.1 10.101c-.981.982-1.494 2.337-1.494 3.835 0 1.498.513 2.895 1.494 3.875l4.347 4.361c.981.979 2.337 1.452 3.834 1.452s2.853-.512 3.835-1.494l2.609-2.637c.514-.514.496-1.365-.039-1.9s-1.386-.553-1.899-.039zM20.811 13.01H10.666c-.702 0-1.27.604-1.27 1.346s.568 1.346 1.27 1.346h10.145c.701 0 1.27-.604 1.27-1.346s-.569-1.346-1.27-1.346z" /></svg>,
     codeforces: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 7.5C5.328 7.5 6 8.172 6 9v10.5c0 .828-.672 1.5-1.5 1.5h-3C.672 21 0 20.328 0 19.5V9c0-.828.672-1.5 1.5-1.5h3zm9-4.5c.828 0 1.5.672 1.5 1.5v15c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5v-15c0-.828.672-1.5 1.5-1.5h3zm9 7.5c.828 0 1.5.672 1.5 1.5v7.5c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5v-7.5c0-.828.672-1.5 1.5-1.5h3z" /></svg>,
-    vjudge: <img src="https://vjudge.net/static/bundle/11b24ab2156955d8f3fa.ico" alt="Vjudge" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+    vjudge: <img src="https://vjudge.net/static/bundle/11b24ab2156955d8f3fa.ico" alt="Vjudge" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
+    whatsapp: <svg viewBox="3.5 3.5 17 17" fill="none"><path d="M17.6 6.31999C16.8669 5.58141 15.9943 4.99596 15.033 4.59767C14.0716 4.19938 13.0406 3.99622 12 3.99999C10.6089 4.00135 9.24248 4.36819 8.03771 5.06377C6.83294 5.75935 5.83208 6.75926 5.13534 7.96335C4.4386 9.16745 4.07046 10.5335 4.06776 11.9246C4.06507 13.3158 4.42793 14.6832 5.12 15.89L4 20L8.2 18.9C9.35975 19.5452 10.6629 19.8891 11.99 19.9C14.0997 19.9001 16.124 19.0668 17.6222 17.5816C19.1205 16.0965 19.9715 14.0796 19.99 11.97C19.983 10.9173 19.7682 9.87634 19.3581 8.9068C18.948 7.93725 18.3505 7.05819 17.6 6.31999ZM12 18.53C10.8177 18.5308 9.65701 18.213 8.64 17.61L8.4 17.46L5.91 18.12L6.57 15.69L6.41 15.44C5.55925 14.0667 5.24174 12.429 5.51762 10.8372C5.7935 9.24545 6.64361 7.81015 7.9069 6.80322C9.1702 5.79628 10.7589 5.28765 12.3721 5.37368C13.9853 5.4597 15.511 6.13441 16.66 7.26999C17.916 8.49818 18.635 10.1735 18.66 11.93C18.6442 13.6859 17.9355 15.3645 16.6882 16.6006C15.441 17.8366 13.756 18.5301 12 18.53ZM15.61 13.59C15.41 13.49 14.44 13.01 14.26 12.95C14.08 12.89 13.94 12.85 13.81 13.05C13.6144 13.3181 13.404 13.5751 13.18 13.82C13.07 13.96 12.95 13.97 12.75 13.82C11.6097 13.3694 10.6597 12.5394 10.06 11.47C9.85 11.12 10.26 11.14 10.64 10.39C10.6681 10.3359 10.6827 10.2759 10.6827 10.215C10.6827 10.1541 10.6681 10.0941 10.64 10.04C10.64 9.93999 10.19 8.95999 10.03 8.56999C9.87 8.17999 9.71 8.23999 9.58 8.22999H9.19C9.08895 8.23154 8.9894 8.25465 8.898 8.29776C8.8066 8.34087 8.72546 8.403 8.66 8.47999C8.43562 8.69817 8.26061 8.96191 8.14676 9.25343C8.03291 9.54495 7.98287 9.85749 8 10.17C8.0627 10.9181 8.34443 11.6311 8.81 12.22C9.6622 13.4958 10.8301 14.5293 12.2 15.22C12.9185 15.6394 13.7535 15.8148 14.58 15.72C14.8552 15.6654 15.1159 15.5535 15.345 15.3915C15.5742 15.2296 15.7667 15.0212 15.91 14.78C16.0428 14.4856 16.0846 14.1583 16.03 13.84C15.94 13.74 15.81 13.69 15.61 13.59Z" fill="currentColor"/></svg>
 };
 
 const SocialLink = ({ name, url, icon }) => {
@@ -118,12 +119,25 @@ const tierConfig = [
 ];
 
 export default function Home() {
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
     const [TotalSolved, setTotalSolved] = useState(0);
     const { activityMap, currentStreak, highestStreak } = useActivityMap(user);
-    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear().toString());
+    const [selectedYear, setSelectedYear] = useState('last365');
+
+    // Extract available past years for the dropdown (strictly < currentYear)
+    const yearsOptions = (() => {
+        const yearsSet = new Set();
+        const currentYear = new Date().getFullYear();
+        Object.keys(activityMap || {}).forEach(dateStr => {
+            const y = new Date(dateStr).getFullYear();
+            if (!isNaN(y) && y < currentYear) {
+                yearsSet.add(y);
+            }
+        });
+        return Array.from(yearsSet).sort((a, b) => b - a);
+    })();
     const [solvedProblems, setSolvedProblems] = useState({});
-    const [selectedTier, setSelectedTier] = useState(() => localStorage.getItem('selectedTier') || 'basic');
+    const [selectedTier, setSelectedTier] = useState('basic');
     const [showAllSolved, setShowAllSolved] = useState(false);
     const [dailyTarget, setDailyTarget] = useState(0);
     const [editingTarget, setEditingTarget] = useState(false);
@@ -154,12 +168,10 @@ export default function Home() {
         leetcode: '',
         codeforces: ''
     });
-    const [editFormData, setEditFormData] = useState({ ...socialLinks });
+    const [editFormData, setEditFormData] = useState({ ...socialLinks, whatsapp: '' });
     const [skillsStats, setSkillsStats] = useState([]);
 
-    useEffect(() => {
-        localStorage.setItem('selectedTier', selectedTier);
-    }, [selectedTier]);
+
 
     const monthsInfo = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -188,21 +200,24 @@ export default function Home() {
                         setTempTarget(data.dailyTarget || 3);
                     }
 
-                    // Load Social Links
-                    if (data.socialLinks) {
-                        setSocialLinks(data.socialLinks);
-                        setEditFormData(data.socialLinks);
-                    } else if (data.vjudgeId) {
-                        const initialLinks = {
-                            linkedin: '',
-                            github: '',
-                            vjudge: data.vjudgeId,
-                            leetcode: '',
-                            codeforces: ''
-                        };
-                        setSocialLinks(initialLinks);
-                        setEditFormData(initialLinks);
+                    // Load selected tier from Firestore
+                    if (data.selectedTier !== undefined) {
+                        setSelectedTier(data.selectedTier);
                     }
+
+                    // Load Social Links
+                    const loadedLinks = data.socialLinks || {
+                        linkedin: '',
+                        github: '',
+                        vjudge: data.vjudgeId || '',
+                        leetcode: '',
+                        codeforces: ''
+                    };
+                    setSocialLinks(loadedLinks);
+                    setEditFormData({
+                        ...loadedLinks,
+                        whatsapp: data.whatsapp || ''
+                    });
 
                     // Calculate Skills Stats
                     const topicCounts = {};
@@ -247,12 +262,32 @@ export default function Home() {
         setIsSavingProfile(true);
         try {
             const userRef = doc(firestore, "users", user.uid);
+            
+            const updatedSocialLinks = {
+                linkedin: editFormData.linkedin || '',
+                github: editFormData.github || '',
+                vjudge: editFormData.vjudge || '',
+                leetcode: editFormData.leetcode || '',
+                codeforces: editFormData.codeforces || ''
+            };
+
             await setDoc(userRef, {
-                socialLinks: editFormData,
-                vjudgeId: editFormData.vjudge
+                socialLinks: updatedSocialLinks,
+                vjudgeId: editFormData.vjudge || '',
+                whatsapp: editFormData.whatsapp || ''
             }, { merge: true });
 
-            setSocialLinks(editFormData);
+            setSocialLinks(updatedSocialLinks);
+
+            if (setUser) {
+                setUser(prev => ({
+                    ...prev,
+                    socialLinks: updatedSocialLinks,
+                    vjudgeId: editFormData.vjudge || '',
+                    whatsapp: editFormData.whatsapp || ''
+                }));
+            }
+
             setIsEditModalOpen(false);
         } catch (error) {
             console.error("Error saving profile", error);
@@ -342,7 +377,8 @@ export default function Home() {
     };
 
     return (
-        <div className="w-full flex flex-col-reverse xl:flex-row gap-4 sm:gap-6 text-neutral-200 min-h-full pb-8 px-4 sm:px-0">
+        <>
+            <div className="w-full flex flex-col-reverse xl:flex-row gap-4 sm:gap-6 text-neutral-200 min-h-full pb-8 px-4 sm:px-0 animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out">
 
             {/* --- LEFT MAIN AREA --- */}
             <div className="flex-1 flex flex-col gap-4 sm:gap-6 min-w-0">
@@ -490,13 +526,18 @@ export default function Home() {
                 <div className="bg-[#141414] rounded-xl border border-[#262626] p-4 sm:p-6 flex flex-col gap-4 sm:gap-5 shadow-sm mt-2">
                     <div className="flex justify-between items-center">
                         <h2 className="text-base font-semibold text-white">Activity</h2>
-                        <select
-                            value={selectedYear}
-                            onChange={(e) => setSelectedYear(e.target.value)}
-                            className="bg-transparent border-none text-sm font-medium text-neutral-400 focus:outline-none focus:text-white cursor-pointer hover:bg-[#262626] px-2 py-1 rounded transition-colors"
-                        >
-                            <option value="2026">2026</option>
-                        </select>
+                        {yearsOptions.length > 0 && (
+                            <select
+                                value={selectedYear}
+                                onChange={(e) => setSelectedYear(e.target.value)}
+                                className="bg-transparent border-none text-sm font-medium text-neutral-400 focus:outline-none focus:text-white cursor-pointer hover:bg-[#262626] px-2 py-1 rounded transition-colors"
+                            >
+                                <option value="last365">Current</option>
+                                {yearsOptions.map(yr => (
+                                    <option key={yr} value={yr.toString()}>{yr}</option>
+                                ))}
+                            </select>
+                        )}
                     </div>
 
                     <div className="w-full pb-2 overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
@@ -505,79 +546,152 @@ export default function Home() {
                                 display: none;
                             }
                         `}</style>
-                        <div className="w-full flex gap-1.5 sm:gap-2 md:gap-3 justify-between min-w-[850px]">
-                            {monthsInfo.map((monthName, mIndex) => {
+                        {(() => {
+                            const currentDate = new Date();
+                            const currentYear = currentDate.getFullYear();
+                            const currentMonth = currentDate.getMonth(); // 0-indexed
+                            const currentDay = currentDate.getDate(); // 1-indexed
+
+                            let monthsToRender = [];
+                            let isLast365 = selectedYear === 'last365';
+
+                            if (isLast365) {
+                                // Start date is exactly 364 days ago (365 days including today)
+                                const startDate = new Date();
+                                startDate.setDate(currentDate.getDate() - 364);
+                                startDate.setHours(0, 0, 0, 0);
+
+                                const limitDate = new Date(currentDate);
+                                limitDate.setHours(23, 59, 59, 999);
+
+                                // Generate all months that fall in this range
+                                let tempDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+                                while (tempDate <= limitDate) {
+                                    monthsToRender.push({
+                                        monthName: monthsInfo[tempDate.getMonth()],
+                                        mIndex: tempDate.getMonth(),
+                                        year: tempDate.getFullYear(),
+                                        startDayLimit: startDate,
+                                        endDayLimit: limitDate
+                                    });
+                                    tempDate = new Date(tempDate.getFullYear(), tempDate.getMonth() + 1, 1);
+                                }
+                            } else {
                                 const yearInt = parseInt(selectedYear);
-                                const daysInMonth = new Date(yearInt, mIndex + 1, 0).getDate();
-                                const firstDayOfWeek = new Date(yearInt, mIndex, 1).getDay();
-
-                                const weeks = [];
-                                let currentWeek = [];
-
-                                for (let i = 0; i < firstDayOfWeek; i++) {
-                                    currentWeek.push(null);
+                                const maxMonthLimit = yearInt === currentYear ? currentMonth : 11;
+                                for (let m = 0; m <= maxMonthLimit; m++) {
+                                    const limitDate = yearInt === currentYear ? new Date(currentYear, currentMonth, currentDay, 23, 59, 59, 999) : null;
+                                    monthsToRender.push({
+                                        monthName: monthsInfo[m],
+                                        mIndex: m,
+                                        year: yearInt,
+                                        endDayLimit: limitDate
+                                    });
                                 }
+                            }
 
-                                for (let day = 1; day <= daysInMonth; day++) {
-                                    currentWeek.push(day);
-                                    if (currentWeek.length === 7) {
-                                        weeks.push(currentWeek);
-                                        currentWeek = [];
-                                    }
-                                }
+                            // Calculate dynamic widths based on the number of months shown
+                            const numMonths = monthsToRender.length;
+                            const containerStyle = {
+                                maxWidth: numMonths < 12 ? `${(numMonths / 12) * 100}%` : '100%',
+                                minWidth: numMonths < 12 ? `${Math.round(850 * numMonths / 12)}px` : '850px'
+                            };
 
-                                if (currentWeek.length > 0) {
-                                    while (currentWeek.length < 7) {
-                                        currentWeek.push(null);
-                                    }
-                                    weeks.push(currentWeek);
-                                }
+                            return (
+                                <div 
+                                    className="flex gap-1.5 sm:gap-2 md:gap-3 justify-between"
+                                    style={containerStyle}
+                                >
+                                    {monthsToRender.map(({ monthName, mIndex, year, startDayLimit, endDayLimit }, i) => {
+                                        const daysInMonth = new Date(year, mIndex + 1, 0).getDate();
+                                        const firstDayOfWeek = new Date(year, mIndex, 1).getDay();
 
-                                return (
-                                    <div key={mIndex} className="flex flex-col gap-1 sm:gap-2" style={{ flex: weeks.length }}>
-                                        <span className="text-[9px] sm:text-[10px] md:text-[11px] font-medium text-neutral-500 overflow-hidden text-ellipsis">{monthName}</span>
-                                        <div className="w-full flex gap-[2px] sm:gap-[3px] justify-between">
-                                            {weeks.map((week, wIndex) => (
-                                                <div key={wIndex} className="flex-1 flex flex-col gap-[2px] sm:gap-[3px]">
-                                                    {week.map((day, dIndex) => {
-                                                        if (day === null) {
-                                                            return <div key={dIndex} className="w-full aspect-square rounded-[1px] md:rounded-[2px] bg-transparent"></div>;
-                                                        }
+                                        const weeks = [];
+                                        let currentWeek = [];
 
-                                                        const date = new Date(yearInt, mIndex, day);
-                                                        const key = date.toDateString();
-                                                        const count = activityMap[key] || 0;
+                                        for (let j = 0; j < firstDayOfWeek; j++) {
+                                            currentWeek.push(null);
+                                        }
 
-                                                        let finalIntensity = 0;
-                                                        if (count === 0) finalIntensity = 0;
-                                                        else if (count === 1) finalIntensity = 1;
-                                                        else if (count === 2) finalIntensity = 2;
-                                                        else if (count <= 4) finalIntensity = 3;
-                                                        else if (count > 4) finalIntensity = 4;
+                                        for (let day = 1; day <= daysInMonth; day++) {
+                                            const dayDate = new Date(year, mIndex, day);
+                                            
+                                            let isValid = true;
+                                            if (startDayLimit) {
+                                                dayDate.setHours(0, 0, 0, 0);
+                                                if (dayDate < startDayLimit) isValid = false;
+                                            }
+                                            if (endDayLimit) {
+                                                dayDate.setHours(23, 59, 59, 999);
+                                                if (dayDate > endDayLimit) isValid = false;
+                                            }
 
-                                                        const colorClass = [
-                                                            'bg-[#1e1e1e]',
-                                                            'bg-[#0e4429]',
-                                                            'bg-[#006d32]',
-                                                            'bg-[#26a641]',
-                                                            'bg-[#39d353]'
-                                                        ][finalIntensity];
+                                            if (isValid) {
+                                                currentWeek.push(day);
+                                            } else {
+                                                currentWeek.push(null);
+                                            }
 
-                                                        return (
-                                                            <div
-                                                                key={dIndex}
-                                                                className={`w-full aspect-square rounded-[1px] md:rounded-[2px] ${colorClass}`}
-                                                                title={`${count} solved on ${key}`}
-                                                            ></div>
-                                                        );
-                                                    })}
+                                            if (currentWeek.length === 7) {
+                                                weeks.push(currentWeek);
+                                                currentWeek = [];
+                                            }
+                                        }
+
+                                        if (currentWeek.length > 0) {
+                                            while (currentWeek.length < 7) {
+                                                currentWeek.push(null);
+                                            }
+                                            weeks.push(currentWeek);
+                                        }
+
+                                        return (
+                                            <div key={i} className="flex flex-col gap-1 sm:gap-2" style={{ flex: weeks.length }}>
+                                                <span className="text-[9px] sm:text-[10px] md:text-[11px] font-medium text-neutral-500 overflow-hidden text-ellipsis">{monthName}</span>
+                                                <div className="w-full flex gap-[2px] sm:gap-[3px] justify-between">
+                                                    {weeks.map((week, wIndex) => (
+                                                        <div key={wIndex} className="flex-1 flex flex-col gap-[2px] sm:gap-[3px]">
+                                                            {week.map((day, dIndex) => {
+                                                                if (day === null) {
+                                                                    return <div key={dIndex} className="w-full aspect-square rounded-[1px] md:rounded-[2px] bg-transparent"></div>;
+                                                                }
+
+                                                                const date = new Date(year, mIndex, day);
+                                                                const key = date.toDateString();
+                                                                const count = activityMap[key] || 0;
+
+                                                                let finalIntensity = 0;
+                                                                if (count === 0) finalIntensity = 0;
+                                                                else if (count === 1) finalIntensity = 1;
+                                                                else if (count === 2) finalIntensity = 2;
+                                                                else if (count <= 4) finalIntensity = 3;
+                                                                else if (count > 4) finalIntensity = 4;
+
+                                                                const colorClass = [
+                                                                    'bg-[#1e1e1e]',
+                                                                    'bg-[#0e4429]',
+                                                                    'bg-[#006d32]',
+                                                                    'bg-[#26a641]',
+                                                                    'bg-[#39d353]'
+                                                                ][finalIntensity];
+
+                                                                return (
+                                                                    <div
+                                                                        key={dIndex}
+                                                                        className={`w-full aspect-square rounded-[1px] md:rounded-[2px] ${colorClass}`}
+                                                                        title={`${count} solved on ${key}`}
+                                                                    ></div>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })()}
                     </div>
 
                     <div className="flex justify-between items-center mt-1 text-[11px] font-medium text-neutral-500">
@@ -717,28 +831,31 @@ export default function Home() {
                 </div>
 
             </div>
+        </div>
 
-            {/* --- EDIT PROFILE OVERLAY MODAL --- */}
-            {isEditModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-                    <div className="bg-[#111] border border-[#333] rounded-2xl w-full max-w-[450px] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-                        <div className="px-6 py-4 border-b border-[#262626] flex justify-between items-center bg-[#141414]">
-                            <h2 className="text-lg font-bold text-white">Edit Profile Links</h2>
-                            <button onClick={() => setIsEditModalOpen(false)} className="text-neutral-500 hover:text-white transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
-                        <form onSubmit={handleSaveProfile} className="p-6 flex flex-col gap-4">
-                            <p className="text-xs text-neutral-400 mb-2">Add your usernames or full profile URLs to display them on your dashboard.</p>
+        {/* --- EDIT PROFILE OVERLAY MODAL --- */}
+        {isEditModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+                <div className="bg-[#111] border border-[#333] rounded-2xl w-full max-w-[600px] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300 [animation-timing-function:cubic-bezier(0.34,1.56,0.64,1)]">
+                    <div className="px-6 py-4 border-b border-[#262626] flex justify-between items-center bg-[#141414]">
+                        <h2 className="text-lg font-bold text-white">Edit Profile Links</h2>
+                        <button onClick={() => setIsEditModalOpen(false)} className="text-neutral-500 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form onSubmit={handleSaveProfile} className="p-6 flex flex-col gap-4">
+                        <p className="text-xs text-neutral-400 mb-2">Add your usernames or profile details to display or track them on your profile.</p>
 
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3.5">
                             {[
                                 { name: 'linkedin', label: 'LinkedIn Username / URL', icon: Icons.linkedin, placeholder: 'johndoe' },
                                 { name: 'github', label: 'GitHub Username / URL', icon: Icons.github, placeholder: 'johndoe' },
                                 { name: 'leetcode', label: 'LeetCode Username', icon: Icons.leetcode, placeholder: 'johndoe' },
                                 { name: 'codeforces', label: 'Codeforces Username', icon: Icons.codeforces, placeholder: 'johndoe' },
                                 { name: 'vjudge', label: 'Vjudge Username', icon: Icons.vjudge, placeholder: 'johndoe' },
+                                { name: 'whatsapp', label: 'WhatsApp Number', icon: Icons.whatsapp, placeholder: '+919876543210' },
                             ].map(field => (
                                 <div key={field.name} className="flex flex-col gap-1.5">
                                     <label className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider ml-1">{field.label}</label>
@@ -757,27 +874,28 @@ export default function Home() {
                                     </div>
                                 </div>
                             ))}
+                        </div>
 
-                            <div className="flex gap-3 mt-4 pt-4 border-t border-[#262626]">
-                                <button type="button" onClick={() => setIsEditModalOpen(false)} className="flex-1 py-2.5 bg-[#222] hover:bg-[#2a2a2a] border border-[#333] text-white text-sm font-medium rounded-lg transition-colors">
-                                    Cancel
-                                </button>
-                                <button type="submit" disabled={isSavingProfile} className="flex-1 py-2.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25 text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
-                                    {isSavingProfile ? (
-                                        <>
-                                            <svg className="animate-spin h-4 w-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            Saving...
-                                        </>
-                                    ) : 'Save Changes'}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div className="flex gap-3 mt-4 pt-4 border-t border-[#262626]">
+                            <button type="button" onClick={() => setIsEditModalOpen(false)} className="flex-1 py-2.5 bg-[#222] hover:bg-[#2a2a2a] border border-[#333] text-white text-sm font-medium rounded-lg transition-colors">
+                                Cancel
+                            </button>
+                            <button type="submit" disabled={isSavingProfile} className="flex-1 py-2.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25 text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                                {isSavingProfile ? (
+                                    <>
+                                        <svg className="animate-spin h-4 w-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Saving...
+                                    </>
+                                ) : 'Save Changes'}
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            )}
-        </div>
+            </div>
+        )}
+    </>
     );
 }

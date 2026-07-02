@@ -48,7 +48,7 @@ export default function Blogs() {
   };
 
   return (
-    <section className="flex flex-col animate-in fade-in duration-500 max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white">
+    <section className="flex flex-col animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white">
       <div className="mb-8 flex flex-col gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-bold mb-2 tracking-tighter">Technical Blogs</h1>
@@ -88,9 +88,9 @@ export default function Blogs() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {currentBlogs.map(blog => (
-                <div key={blog.id} className="p-5 sm:p-6 rounded-xl border border-[#262626] bg-[#141414] hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] hover:border-[#444] hover:bg-[#1a1a1a] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group">
+                <div key={blog.id} className="p-5 sm:p-6 rounded-xl border border-[#262626] bg-[#141414] flex flex-col h-full">
                   <div className="flex-1">
-                    <h2 className="text-lg font-bold text-[#e5e5e5] mb-2 group-hover:text-white transition-colors leading-tight line-clamp-2">{blog.title}</h2>
+                    <h2 className="text-lg font-bold text-[#e5e5e5] mb-2 leading-tight line-clamp-2">{blog.title}</h2>
                     <p className="text-neutral-400 text-sm mb-4 line-clamp-3 leading-relaxed">
                       {getExcerpt(blog.content)}
                     </p>
@@ -101,9 +101,9 @@ export default function Blogs() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                       {blog.likes?.length || 0}
                     </div>
-                    <Link to={`/blogs/${blog.id}`} className="inline-flex items-center justify-center gap-1.5 text-[10px] font-bold text-white bg-[#2a2a2a] hover:bg-white hover:text-black px-4 py-2 rounded-lg transition-all uppercase tracking-widest active:scale-95">
+                    <Link to={`/blogs/${blog.id}`} className="inline-flex items-center justify-center gap-1.5 text-[10px] font-bold text-white bg-[#2a2a2a] hover:bg-white hover:text-black px-4 py-2 rounded-lg transition-all uppercase tracking-widest active:scale-95 group">
                       READ
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:translate-x-1"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </Link>
                   </div>
                 </div>

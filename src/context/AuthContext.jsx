@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   // Show the fancy loading screen only on the very first open of the tab,
   // not on every refresh. sessionStorage is cleared when the tab is closed.
   const [showSplash] = useState(() => !sessionStorage.getItem('a2o_loaded'));
+  const [isSplashFinished, setIsSplashFinished] = useState(!showSplash);
 
   const logout = async () => {
     try {
@@ -53,11 +54,11 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, loading, logout, setUser }}>
-      {loading
-        ? (showSplash
-            ? <LoadingScreen />
-            : <div style={{ position: 'fixed', inset: 0, backgroundColor: '#0E0E0E' }} />)
-        : children}
+      {!isSplashFinished
+        ? <LoadingScreen isLoading={loading} onComplete={() => setIsSplashFinished(true)} />
+        : (loading
+            ? <div style={{ position: 'fixed', inset: 0, backgroundColor: '#0E0E0E' }} />
+            : children)}
     </AuthContext.Provider>
   );
 };
