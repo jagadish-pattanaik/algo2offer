@@ -177,10 +177,10 @@ export default function LandingPage() {
       '-=0.9'
     );
 
-    // Auto rotate tier showcase (Slowed down to 5s for premium readable pace)
+    // Auto rotate tier showcase (Adjusted to 1.5s pace)
     const interval = setInterval(() => {
       setAutoTierIdx((prev) => (prev + 1) % SNEAK_PEEK_TIERS.length);
-    }, 5000);
+    }, 1500);
 
     // Scroll-triggered reveals
     const revealObserver = new IntersectionObserver((entries) => {
