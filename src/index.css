@@ -99,3 +99,13 @@
 .ease-out {
   animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
+
+/* Prevent Flash of Unanimated Content (FOAC) for GSAP elements */
+.anim-navbar,
+.anim-hero-title,
+.anim-hero-desc,
+.anim-hero-cta,
+.anim-hero-visual,
+.anim-scroll-card {
+  opacity: 0;
+}
