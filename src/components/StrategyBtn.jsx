@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function StrategyBtn({ info }) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
     const renderStrategyText = (text) => {
-        if (!text) return "No specific strategy defined for this tier yet. Focus on mastering the core patterns identified in the problem set.";
+        if (!text) return "No specific strategy defined for this track yet. Focus on mastering the core patterns identified in the topic set.";
         
         const urlRegex = /(https?:\/\/[^\s]+)/g;
         return text.split(urlRegex).map((part, index) => {
@@ -34,7 +35,7 @@ export default function StrategyBtn({ info }) {
             </button>
 
 
-            {isOverlayOpen && (
+            {isOverlayOpen && createPortal(
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
                     {/* Backdrop */}
                     <div
@@ -43,23 +44,23 @@ export default function StrategyBtn({ info }) {
                     ></div>
 
                     {/* Modal Content */}
-                    <div className="glass-card relative z-10 w-full max-w-2xl p-8 rounded-[32px] border border-[#2a2a2a] bg-[#0E0E0E] shadow-2xl flex flex-col max-h-[85vh]">
+                    <div className="relative z-10 w-full max-w-2xl p-8 rounded-[32px] border border-[#262626] bg-[#0E0E0E] shadow-2xl flex flex-col max-h-[85vh]">
                         <div className="flex justify-between items-center mb-6 shrink-0">
-                            <h2 className="text-2xl font-bold text-gradient">{info.title} Strategy</h2>
+                            <h2 className="text-2xl font-bold text-gradient">{info?.title} Strategy</h2>
                             <button
                                 onClick={() => setIsOverlayOpen(false)}
-                                className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                                className="p-2 hover:bg-white/10 rounded-full transition-colors text-neutral-400 hover:text-white"
                             >
                                 ✕
                             </button>
                         </div>
 
                         <div className="text-[#aaa] leading-relaxed space-y-4 overflow-y-auto pr-2 custom-scrollbar">
-                            <p className="whitespace-pre-wrap">{renderStrategyText(info.instruction)}</p>
+                            <p className="whitespace-pre-wrap">{renderStrategyText(info?.instruction)}</p>
                         </div>
                     </div>
-                </div>
-
+                </div>,
+                document.body
             )}
         </>
     )

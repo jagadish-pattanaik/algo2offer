@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase/firebase';
@@ -6,8 +7,10 @@ export default function Login() {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || '/home';
+  const [showTerms, setShowTerms] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
-const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
       navigate(from, { replace: true });
@@ -15,7 +18,6 @@ const handleGoogleLogin = async () => {
       console.error("Google sign in failed:", error);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-[#0E0E0E] text-white font-sans w-full">
@@ -52,12 +54,97 @@ const handleGoogleLogin = async () => {
 
         <p className="mt-10 text-[#555] text-xs font-medium max-w-[260px] leading-relaxed">
           By continuing, you agree to our{' '}
-          <Link to="/terms" className="text-[#888] hover:text-white underline decoration-[#444] underline-offset-2 transition-colors">Terms of Service</Link>{' '}
+          <button 
+            type="button" 
+            onClick={() => setShowTerms(true)}
+            className="text-[#888] hover:text-white underline decoration-[#444] underline-offset-2 transition-colors font-semibold"
+          >
+            Terms of Service
+          </button>{' '}
           and{' '}
-          <Link to="/privacy" className="text-[#888] hover:text-white underline decoration-[#444] underline-offset-2 transition-colors">Privacy Policy</Link>.
+          <button 
+            type="button" 
+            onClick={() => setShowPrivacy(true)}
+            className="text-[#888] hover:text-white underline decoration-[#444] underline-offset-2 transition-colors font-semibold"
+          >
+            Privacy Policy
+          </button>.
         </p>
 
       </div>
+
+      {/* TERMS OF SERVICE MODAL */}
+      {showTerms && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="bg-[#141516] border border-[#2a2a2a] w-full max-w-lg md:max-w-3xl lg:max-w-4xl rounded-3xl p-6 sm:p-8 relative max-h-[85vh] md:max-h-none overflow-y-auto md:overflow-y-visible flex flex-col gap-4 text-left">
+            <button 
+              onClick={() => setShowTerms(false)}
+              className="absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <h2 className="text-xl font-bold text-white mb-2">Terms of Service</h2>
+            <div className="text-neutral-400 text-xs sm:text-sm space-y-4 leading-relaxed">
+              <p className="font-semibold text-white">Welcome to Algo2Offer.</p>
+              <p>By registering, signing in, or using our services, you agree to comply with and be bound by these Terms of Service. Please read them carefully.</p>
+              <h3 className="font-semibold text-white mt-4">1. Acceptance of Terms</h3>
+              <p>By logging in via Firebase using Google authentication, you acknowledge that you have read, understood, and agreed to be bound by these terms. If you do not agree, you must not access or use this platform.</p>
+              <h3 className="font-semibold text-white mt-4">2. Account Responsibility</h3>
+              <p>You are solely responsible for maintaining the confidentiality of your credentials and all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+              <h3 className="font-semibold text-white mt-4">3. User Conduct & Honor Code</h3>
+              <p>You agree to use the platform solely for learning and placement preparation. Plagiarism, sharing of premium editorial content, or attempting to disrupt our systems is strictly prohibited.</p>
+              <h3 className="font-semibold text-white mt-4">4. Limitation of Liability</h3>
+              <p>Algo2Offer and its contributors shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use this platform.</p>
+            </div>
+            <button 
+              onClick={() => setShowTerms(false)}
+              className="w-full md:w-32 bg-white text-black py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors mt-4 self-end text-center"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* PRIVACY POLICY MODAL */}
+      {showPrivacy && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="bg-[#141516] border border-[#2a2a2a] w-full max-w-lg md:max-w-3xl lg:max-w-4xl rounded-3xl p-6 sm:p-8 relative max-h-[85vh] md:max-h-none overflow-y-auto md:overflow-y-visible flex flex-col gap-4 text-left">
+            <button 
+              onClick={() => setShowPrivacy(false)}
+              className="absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <h2 className="text-xl font-bold text-white mb-2">Privacy Policy</h2>
+            <div className="text-neutral-400 text-xs sm:text-sm space-y-4 leading-relaxed">
+              <p className="font-semibold text-white">Your Privacy is our Priority.</p>
+              <p>This Privacy Policy describes how Algo2Offer collects, uses, and protects your information when you log in and utilize the platform.</p>
+              <h3 className="font-semibold text-white mt-4">1. Information We Collect</h3>
+              <p>We use Firebase Authentication to facilitate secure log-in. When you sign in using Google, we retrieve your public profile information (such as your name, email address, and profile picture) to personalize your workspace.</p>
+              <h3 className="font-semibold text-white mt-4">2. How We Use Information</h3>
+              <p>Your profile data is strictly used to display your learning progress metrics, submit tasks, maintain daily streaks, and manage dashboard custom configurations.</p>
+              <h3 className="font-semibold text-white mt-4">3. Data Sharing & Security</h3>
+              <p>We do not sell, trade, or share your personal data with third parties. All authentication procedures are handled securely by Google Firebase services.</p>
+              <h3 className="font-semibold text-white mt-4">4. Your Consent</h3>
+              <p>By logging in and accepting these policies, you consent to the storage and retrieval of your profile data as described herein.</p>
+            </div>
+            <button 
+              onClick={() => setShowPrivacy(false)}
+              className="w-full md:w-32 bg-white text-black py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors mt-4 self-end text-center"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

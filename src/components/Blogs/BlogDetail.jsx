@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { doc, getDoc, updateDoc, arrayUnion, arrayRemove, collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, arrayUnion, arrayRemove, collection, addDoc, onSnapshot, query, orderBy, deleteDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 import { useAuth } from '../../context/AuthContext';
 import MDEditor from '@uiw/react-md-editor';
@@ -79,6 +79,17 @@ export default function BlogDetail() {
       console.error("Error posting comment:", error);
     } finally {
       setCommenting(false);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    if (!window.confirm("Are you sure you want to delete this comment?")) return;
+    try {
+      const commentRef = doc(firestore, 'blogs', id, 'comments', commentId);
+      await deleteDoc(commentRef);
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      alert("Failed to delete comment.");
     }
   };
 
@@ -238,7 +249,18 @@ export default function BlogDetail() {
                     <div className="w-6 h-6 rounded-md bg-[#222] border border-[#333] flex items-center justify-center text-[10px] font-bold text-white uppercase">{c.authorName?.charAt(0) || 'U'}</div>
                     <span className="font-semibold text-white text-sm tracking-tight">{c.authorName}</span>
                 </div>
-                <span className="text-[11px] font-mono text-neutral-500">{new Date(c.createdAt).toLocaleDateString()}</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-[11px] font-mono text-neutral-500">{new Date(c.createdAt).toLocaleDateString()}</span>
+                  {(user?.uid === c.uid || user?.role === 'admin') && (
+                    <button
+                      onClick={() => handleDeleteComment(c.id)}
+                      className="text-neutral-500 hover:text-red-500 transition-colors p-1 rounded hover:bg-neutral-800/50"
+                      title="Delete Comment"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    </button>
+                  )}
+                </div>
               </div>
               <p className="text-neutral-300 text-sm leading-relaxed mt-1">{c.text}</p>
             </div>

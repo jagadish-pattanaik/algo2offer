@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import MDEditor from '@uiw/react-md-editor';
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../../../firebase/firebase';
@@ -85,16 +86,16 @@ function BlogEditorModal({ editingBlog, user, onClose, onSaved }) {
     }
   };
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/75 backdrop-blur-sm" />
+      <div className="fixed inset-0 bg-black/75 backdrop-blur-sm -z-10" />
 
       {/* Panel */}
-      <div className="relative z-10 w-full max-w-4xl bg-[#141516] border border-[#2a2a2a] rounded-[24px] shadow-2xl overflow-hidden mb-8"
+      <div className="relative z-10 w-full max-w-4xl bg-[#141516] border border-[#2a2a2a] rounded-[24px] shadow-2xl overflow-hidden my-auto"
         data-color-mode="dark"
       >
         {/* Modal header */}
@@ -179,7 +180,8 @@ function BlogEditorModal({ editingBlog, user, onClose, onSaved }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

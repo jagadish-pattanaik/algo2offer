@@ -32,19 +32,23 @@ import AdminBlogs from './components/Admin/pages/AdminBlogs';
 import { NavLink } from 'react-router-dom';
 
 const LoginRoute = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const location = useLocation();
   const from = location.state?.from || '/home';
 
+  if (loading) return <Login />;
   if (user?.isNewUser || user?.isProfileIncomplete) return <Navigate to="/profile-setup" state={{ from }} replace />;
   if (user) return <Navigate to={from} replace />;
   return <Login />;
 };
 
 const AuthGuard = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const location = useLocation();
 
+  if (loading) {
+    return <LoadingScreen />;
+  }
   if (!user) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
@@ -71,7 +75,10 @@ const DashboardLayout = () => {
     <div className="flex flex-col md:flex-row h-[100dvh] w-full bg-[#0E0E0E] text-white font-sans overflow-hidden relative">
       {/* Mobile Header with Hamburger */}
       <div className="md:hidden flex items-center justify-between px-6 border-b border-[#2a2a2a] bg-[#141414] h-[60px] flex-shrink-0 z-50">
-        <div className="w-6 h-6 rounded-full border-[3px] border-white bg-transparent shadow-[0_0_12px_rgba(255,255,255,0.6)]"></div>
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 rounded-full border-[3px] border-white bg-transparent shadow-[0_0_12px_rgba(255,255,255,0.6)]"></div>
+          <span className="text-white font-extrabold text-base tracking-wider">Algo2Offer</span>
+        </div>
 
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -204,23 +211,19 @@ const DashboardLayout = () => {
 function App() {
   const { user, loading } = useAuth();
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
   return (
     <BrowserRouter>
       <Routes>
 
         <Route
           path="/"
-          element={user ? <Navigate to="/home" replace /> : <LandingPage />}
+          element={loading ? <LandingPage /> : (user ? <Navigate to="/home" replace /> : <LandingPage />)}
         />
         <Route path="/login" element={<LoginRoute />} />
 
         <Route
           path="/profile-setup"
-          element={user && (user.isNewUser || user.isProfileIncomplete) ? <ProfileSetup /> : <Navigate to={user ? "/home" : "/login"} replace />}
+          element={loading ? <LoadingScreen /> : (user && (user.isNewUser || user.isProfileIncomplete) ? <ProfileSetup /> : <Navigate to={user ? "/home" : "/login"} replace />)}
         />
 
         <Route element={<AuthGuard><DashboardLayout /></AuthGuard>}>
@@ -261,5 +264,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
