@@ -142,34 +142,34 @@ export default function LandingPage() {
   useEffect(() => {
     // Hero entrance animations
     const tl = gsap.timeline();
-    
+
     // Navbar drop-in
     tl.fromTo('.anim-navbar',
       { y: -20, opacity: 0, filter: 'blur(5px)' },
       { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' }
     );
-    
+
     // Title reveal
     tl.fromTo('.anim-hero-title',
       { y: 50, opacity: 0, filter: 'blur(10px)' },
       { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.0, ease: 'power4.out' },
       '-=0.6'
     );
-    
+
     // Description reveal
     tl.fromTo('.anim-hero-desc',
       { y: 20, opacity: 0, filter: 'blur(8px)' },
       { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' },
       '-=0.7'
     );
-    
+
     // CTA Button
     tl.fromTo('.anim-hero-cta',
       { y: 15, opacity: 0, scale: 0.96 },
       { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' },
       '-=0.6'
     );
-    
+
     // Orb/Visual slide-in
     tl.fromTo('.anim-hero-visual',
       { scale: 0.85, opacity: 0, filter: 'blur(15px)' },
@@ -222,7 +222,7 @@ export default function LandingPage() {
       <section className="max-w-[1400px] mx-auto px-6 sm:px-8 pt-10 pb-20 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[90vh]">
 
         {/* Left Content column */}
-        <div className="lg:col-span-6 space-y-6 sm:space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start">
+        <div className="lg:col-span-6 space-y-6 sm:space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start relative z-20">
           <h1 className="anim-hero-title text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-[1.08] text-white">
             From Algorithms <br />
             to Offers: <br />
@@ -572,8 +572,8 @@ export default function LandingPage() {
               <div
                 key={idx}
                 className={`anim-scroll-card rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
-                    ? 'bg-[#141516] border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.02)]'
-                    : 'bg-transparent border-[#2a2a2a] hover:border-white/10'
+                  ? 'bg-[#141516] border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.02)]'
+                  : 'bg-transparent border-[#2a2a2a] hover:border-white/10'
                   }`}
               >
                 <button
