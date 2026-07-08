@@ -8,12 +8,9 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const isPublicRoute = window.location.pathname === '/' || window.location.pathname === '/login';
-
-  const [showSplash] = useState(() => {
-    if (isPublicRoute) return false;
-    return !sessionStorage.getItem('a2o_loaded');
-  });
+  // Show the fancy loading screen only on the very first open of the tab,
+  // not on every refresh. sessionStorage is cleared when the tab is closed.
+  const [showSplash] = useState(() => !sessionStorage.getItem('a2o_loaded'));
   const [isSplashFinished, setIsSplashFinished] = useState(!showSplash);
 
   const logout = async () => {
@@ -30,7 +27,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const userDocRef = doc(firestore, 'users', currentUser.uid);
           const userDoc = await getDoc(userDocRef);
-          
+
           if (userDoc.exists()) {
             const data = userDoc.data();
             // Check if all mandatory fields are filled
@@ -59,7 +56,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{ user, loading, logout, setUser }}>
       {!isSplashFinished
         ? <LoadingScreen isLoading={loading} onComplete={() => setIsSplashFinished(true)} />
-        : ((loading && !isPublicRoute)
+        : (loading
             ? <div style={{ position: 'fixed', inset: 0, backgroundColor: '#0E0E0E' }} />
             : children)}
     </AuthContext.Provider>

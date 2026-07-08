@@ -32,23 +32,19 @@ import AdminBlogs from './components/Admin/pages/AdminBlogs';
 import { NavLink } from 'react-router-dom';
 
 const LoginRoute = () => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
   const from = location.state?.from || '/home';
 
-  if (loading) return <Login />;
   if (user?.isNewUser || user?.isProfileIncomplete) return <Navigate to="/profile-setup" state={{ from }} replace />;
   if (user) return <Navigate to={from} replace />;
   return <Login />;
 };
 
 const AuthGuard = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
   if (!user) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
@@ -211,19 +207,23 @@ const DashboardLayout = () => {
 function App() {
   const { user, loading } = useAuth();
 
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
 
         <Route
           path="/"
-          element={loading ? <LandingPage /> : (user ? <Navigate to="/home" replace /> : <LandingPage />)}
+          element={user ? <Navigate to="/home" replace /> : <LandingPage />}
         />
         <Route path="/login" element={<LoginRoute />} />
 
         <Route
           path="/profile-setup"
-          element={loading ? <LoadingScreen /> : (user && (user.isNewUser || user.isProfileIncomplete) ? <ProfileSetup /> : <Navigate to={user ? "/home" : "/login"} replace />)}
+          element={user && (user.isNewUser || user.isProfileIncomplete) ? <ProfileSetup /> : <Navigate to={user ? "/home" : "/login"} replace />}
         />
 
         <Route element={<AuthGuard><DashboardLayout /></AuthGuard>}>
