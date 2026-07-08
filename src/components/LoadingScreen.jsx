@@ -64,6 +64,11 @@ export default function LoadingScreen({ isLoading = false, onComplete }) {
           Algo2Offer
         </h1>
 
+        {/* Subtitle */}
+        <p className="text-xs text-neutral-500 font-mono tracking-[0.2em] uppercase">
+          Algorithms → Offers
+        </p>
+
         {/* Progress Percent */}
         <div className="mt-8 text-sm font-semibold text-neutral-400 font-mono tracking-wide">
           {progress}%
