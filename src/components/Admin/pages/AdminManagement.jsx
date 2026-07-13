@@ -2,6 +2,8 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../../../firebase/firebase';
 import { useAuth } from '../../../context/AuthContext';
+import SEO from '../../SEO';
+
 
 export default function AdminManagement() {
   const { user: currentUser } = useAuth();
@@ -117,6 +119,11 @@ export default function AdminManagement() {
 
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto w-full animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out">
+      <SEO 
+        title="Admin Management" 
+        noindex={true} 
+      />
+
       
       {/* Toast Notification */}
       {notification && (

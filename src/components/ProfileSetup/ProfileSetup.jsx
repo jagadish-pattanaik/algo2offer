@@ -3,6 +3,8 @@ import { useAuth } from '../../context/AuthContext';
 import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 import { useNavigate, useLocation } from 'react-router-dom';
+import SEO from '../SEO';
+
 
 const InputField = ({ icon, label, name, value, onChange, required, placeholder, type = "text" }) => (
   <div className="flex flex-col gap-1 sm:gap-1.5 w-full">
@@ -82,8 +84,14 @@ export default function ProfileSetup() {
 
   return (
     <div className="h-[100dvh] flex items-center justify-center p-0 sm:p-8 relative overflow-hidden bg-[#050505] text-white font-sans w-full">
+      <SEO 
+        title="Profile Setup" 
+        description="Set up your profile to start preparation on Algo2Offer." 
+        noindex={true} 
+      />
       {/* Background Effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#48D2A0]/5 blur-[150px] rounded-full pointer-events-none"></div>
+
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#1a1a1a]/40 blur-[120px] rounded-full pointer-events-none"></div>
 
       {/* Grid Pattern */}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../../../firebase/firebase';
+import SEO from '../../SEO';
+
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -76,6 +78,11 @@ export default function AdminDashboard() {
 
   return (
     <div className="flex flex-col gap-8 max-w-7xl mx-auto w-full animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out">
+      <SEO 
+        title="Admin Dashboard" 
+        noindex={true} 
+      />
+
       
       {/* Title block */}
       <div>

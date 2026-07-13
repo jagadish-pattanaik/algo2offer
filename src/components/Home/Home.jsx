@@ -4,6 +4,8 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase";
 import { useActivityMap } from "../Hooks/useActivityMap";
 import { AllTierData } from "../../Data/index";
+import SEO from "../SEO";
+
 
 // --- Icons ---
 const Icons = {
@@ -378,7 +380,12 @@ export default function Home() {
 
     return (
         <>
+            <SEO 
+                title="Home" 
+                noindex={true} 
+            />
             <div className="w-full flex flex-col-reverse xl:flex-row gap-4 sm:gap-6 text-neutral-200 min-h-full pb-8 px-4 sm:px-0 animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out">
+
 
             {/* --- LEFT MAIN AREA --- */}
             <div className="flex-1 flex flex-col gap-4 sm:gap-6 min-w-0">

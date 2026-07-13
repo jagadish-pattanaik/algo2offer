@@ -5,6 +5,8 @@ import { firestore } from '../../firebase/firebase';
 import { useAuth } from '../../context/AuthContext';
 import MDEditor from '@uiw/react-md-editor';
 import Spinner from '../Spinner';
+import SEO from '../SEO';
+
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -142,10 +144,24 @@ export default function BlogDetail() {
     }
   };
     
-  
+  const getExcerpt = (markdown) => {
+    if (!markdown) return '';
+    const stripped = markdown.replace(/[#*`>_-]/g, '').trim();
+    return stripped.length > 150 ? stripped.substring(0, 150) + '...' : stripped;
+  };
+
   return (
     <>
-    <section className="flex flex-col animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white" data-color-mode="dark">
+      <SEO 
+        title={blog.title}
+        description={getExcerpt(blog.content)}
+        breadcrumbs={[
+          { name: "Blogs", path: "/blogs" },
+          { name: blog.title, path: `/blogs/${id}` }
+        ]}
+      />
+      <section className="flex flex-col animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white" data-color-mode="dark">
+
       
       <Link to="/blogs" className="group flex items-center gap-2 text-neutral-500 hover:text-white transition-all mb-12 w-fit text-sm font-bold tracking-widest uppercase">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 group-hover:-translate-x-1"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>

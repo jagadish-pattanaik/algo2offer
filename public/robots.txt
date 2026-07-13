@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /blogs
+Allow: /blogs/
+Disallow: /admin
+Disallow: /admin/
+Disallow: /profile-setup
+Disallow: /login
+Disallow: /DSA/
+Disallow: /contests
+Disallow: /computerFundamentals
+Disallow: /aptitude
+Disallow: /effectiveCommunication
+
+Sitemap: https://algo2offer-beta.vercel.app/sitemap.xml

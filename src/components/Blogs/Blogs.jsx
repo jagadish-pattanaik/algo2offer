@@ -3,6 +3,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 import { Link } from 'react-router-dom';
 import Spinner from '../Spinner';
+import SEO from '../SEO';
+
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -49,6 +51,12 @@ export default function Blogs() {
 
   return (
     <section className="flex flex-col animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white">
+      <SEO 
+        title="Technical Blogs"
+        description="Read the latest articles, guides, and placement preparation updates on Algo2Offer."
+        breadcrumbs={[{ name: "Blogs", path: "/blogs" }]}
+      />
+
       <div className="mb-8 flex flex-col gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-bold mb-2 tracking-tighter">Technical Blogs</h1>

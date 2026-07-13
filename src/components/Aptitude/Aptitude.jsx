@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { categoriesData } from '../../Data/Aptitude';
+import SEO from '../SEO';
+
 
 const Aptitude = () => {
   // Scroll states for each category to show/hide scroll arrows
@@ -54,6 +56,11 @@ const Aptitude = () => {
 
   return (
     <div className="flex flex-col gap-8 md:gap-10 animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white">
+      <SEO 
+        title="Aptitude & Reasoning" 
+        noindex={true} 
+      />
+
       
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6">

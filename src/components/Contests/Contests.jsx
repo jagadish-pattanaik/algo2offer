@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
+import SEO from '../SEO';
+
 
 const PAGE_SIZE = 10;
 const WEBHOOK_URL = import.meta.env.VITE_WEBHOOK_URL;
@@ -653,7 +655,12 @@ export default function Contests() {
   // ── Render ───────────────────────────────────────────────────────────────
   return (
     <>
+      <SEO 
+        title="Contests" 
+        noindex={true} 
+      />
       <div className="animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out" style={{ display: 'flex', gap: 20, width: '100%', alignItems: 'flex-start', minHeight: '100%' }}>
+
 
         {/* ── LEFT: Contest list ──────────────────────────────────────────── */}
         <section

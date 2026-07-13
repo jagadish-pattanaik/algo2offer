@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase/firebase';
+import SEO from '../SEO';
+
 
 export default function Login() {
   const location = useLocation();
@@ -21,8 +23,13 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-[#0E0E0E] text-white font-sans w-full">
-
+      <SEO 
+        title="Sign In" 
+        description="Sign in to Algo2Offer to continue your placement preparation." 
+        noindex={true} 
+      />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#48D2A0]/10 blur-[150px] rounded-full pointer-events-none"></div>
+
 
       <div className="glass-card w-full max-w-[420px] p-10 sm:p-12 rounded-[40px] relative z-10 flex flex-col items-center text-center shadow-2xl">
 

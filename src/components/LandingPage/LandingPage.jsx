@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { useAuth } from '../../context/AuthContext';
+import SEO from '../SEO';
+
 
 
 
@@ -208,7 +210,10 @@ export default function LandingPage() {
 
   return (
     <div className="w-full min-h-screen font-sans bg-[#0E0E0E] text-white overflow-x-hidden relative selection:bg-white/20 selection:text-white">
-
+      <SEO 
+        title="Algo2Offer - From Algorithms to Offers" 
+        description="Learn DSA, Computer science fundamentals, aptitude, and track your daily placement preparedness metrics in a high-fidelity integrated cockpit."
+      />
 
       {/* HEADER NAVBAR */}
       <header className="anim-navbar max-w-[1400px] mx-auto px-6 sm:px-8 h-20 flex items-center justify-between z-20 relative">

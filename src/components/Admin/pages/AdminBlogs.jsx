@@ -4,6 +4,8 @@ import MDEditor from '@uiw/react-md-editor';
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../../../firebase/firebase';
 import { useAuth } from '../../../context/AuthContext';
+import SEO from '../../SEO';
+
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -261,6 +263,11 @@ export default function AdminBlogs() {
       )}
 
       <div className="flex flex-col gap-8 text-white w-full max-w-[1200px] mx-auto px-4 md:px-6 py-6 mb-20">
+        <SEO 
+          title="Manage Blogs" 
+          noindex={true} 
+        />
+
 
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">

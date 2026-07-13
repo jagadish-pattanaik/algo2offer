@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { firestore } from '../../../firebase/firebase';
+import SEO from '../../SEO';
+
 
 // ─── Helpers (mirrored from Contests.jsx) ────────────────────────────────────
 
@@ -310,6 +312,11 @@ export default function AdminContests() {
       )}
 
       <div className="flex flex-col gap-8 text-white w-full max-w-[1200px] mx-auto px-4 md:px-6 py-6 mb-20">
+        <SEO 
+          title="Manage Contests" 
+          noindex={true} 
+        />
+
 
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">

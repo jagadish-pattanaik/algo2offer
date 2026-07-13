@@ -3,11 +3,18 @@ import { topics } from '../Data/CS-Funds';
 import CardCSFund from './CardCSFund';
 import { instructions } from '../Data/Instructions';
 import StrategyBtn from './StrategyBtn';
+import SEO from './SEO';
+
 
 const CSFunds = ({}) => {
 
   return (
     <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in slide-in-from-bottom-2 duration-500 ease-out max-w-[1200px] mx-auto p-4 md:p-6 mb-20 md:pt-12 w-full h-full text-white">
+      <SEO 
+        title="Computer Fundamentals" 
+        noindex={true} 
+      />
+
       
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
         <div className="max-w-xl flex flex-col items-start">
