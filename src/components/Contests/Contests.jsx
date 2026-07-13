@@ -963,7 +963,7 @@ export default function Contests() {
                     key={p}
                     onClick={() => setPage(p)}
                     className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${p === safePage
-                      ? 'bg-[#48D2A0] text-black shadow-[0_0_10px_rgba(72,210,160,0.3)]'
+                      ? 'bg-white text-black shadow-[0_0_10px_rgba(72,210,160,0.3)]'
                       : 'bg-[#1a1c1d] border border-[#2a2a2a] text-[#888] hover:text-white hover:border-[#444]'
                       }`}
                   >
