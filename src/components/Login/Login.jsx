@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { signInWithRedirect } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase/firebase';
 import SEO from '../SEO';
 
@@ -11,29 +11,53 @@ export default function Login() {
   const from = location.state?.from || '/home';
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    const checkRedirectAuth = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        
+        if (result?.user) {
+          navigate(from, { replace: true });
+        } else {
+          setIsCheckingAuth(false);
+        }
+      } catch (error) {
+        console.error("Redirect sign-in failed:", error);
+        setIsCheckingAuth(false);
+      }
+    };
+
+    checkRedirectAuth();
+  }, [navigate, from]);
 
   const handleGoogleLogin = async () => {
     try {
       await signInWithRedirect(auth, googleProvider);
     } catch (error) {
-      console.error("Google sign in failed:", error);
+      console.error("Failed to trigger Google redirect:", error);
     }
   };
 
+  if (isCheckingAuth) {
+    return <div className="min-h-screen bg-[#0E0E0E]" />;
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-[#0E0E0E] text-white font-sans w-full">
-      <SEO 
-        title="Sign In" 
-        description="Sign in to Algo2Offer to continue your placement preparation." 
-        noindex={true} 
+      <SEO
+        title="Sign In"
+        description="Sign in to Algo2Offer to continue your placement preparation."
+        noindex={true}
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#48D2A0]/10 blur-[150px] rounded-full pointer-events-none"></div>
 
 
       <div className="glass-card w-full max-w-[420px] p-10 sm:p-12 rounded-[40px] relative z-10 flex flex-col items-center text-center shadow-2xl">
 
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="w-16 h-16 rounded-full border-[3px] border-white shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-8 hover:scale-105 transition-transform flex items-center justify-center bg-transparent"
           aria-label="Back to home"
         ></Link>
@@ -43,15 +67,15 @@ export default function Login() {
 
         <div className="w-full flex flex-col gap-4">
 
-          <button 
+          <button
             onClick={handleGoogleLogin}
             className="w-full bg-white text-black py-4 px-6 rounded-2xl font-bold text-sm hover:scale-[1.02] transition-transform active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center gap-3"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
             </svg>
             Continue with Google
           </button>
@@ -60,16 +84,16 @@ export default function Login() {
 
         <p className="mt-10 text-[#555] text-xs font-medium max-w-[260px] leading-relaxed">
           By continuing, you agree to our{' '}
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => setShowTerms(true)}
             className="text-[#888] hover:text-white underline decoration-[#444] underline-offset-2 transition-colors font-semibold"
           >
             Terms of Service
           </button>{' '}
           and{' '}
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => setShowPrivacy(true)}
             className="text-[#888] hover:text-white underline decoration-[#444] underline-offset-2 transition-colors font-semibold"
           >
@@ -83,7 +107,7 @@ export default function Login() {
       {showTerms && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="bg-[#141516] border border-[#2a2a2a] w-full max-w-lg md:max-w-3xl lg:max-w-4xl rounded-3xl p-6 sm:p-8 relative max-h-[85vh] md:max-h-none overflow-y-auto md:overflow-y-visible flex flex-col gap-4 text-left">
-            <button 
+            <button
               onClick={() => setShowTerms(false)}
               className="absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors"
             >
@@ -105,7 +129,7 @@ export default function Login() {
               <h3 className="font-semibold text-white mt-4">4. Limitation of Liability</h3>
               <p>Algo2Offer and its contributors shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use this platform.</p>
             </div>
-            <button 
+            <button
               onClick={() => setShowTerms(false)}
               className="w-full md:w-32 bg-white text-black py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors mt-4 self-end text-center"
             >
@@ -119,7 +143,7 @@ export default function Login() {
       {showPrivacy && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="bg-[#141516] border border-[#2a2a2a] w-full max-w-lg md:max-w-3xl lg:max-w-4xl rounded-3xl p-6 sm:p-8 relative max-h-[85vh] md:max-h-none overflow-y-auto md:overflow-y-visible flex flex-col gap-4 text-left">
-            <button 
+            <button
               onClick={() => setShowPrivacy(false)}
               className="absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors"
             >
@@ -141,7 +165,7 @@ export default function Login() {
               <h3 className="font-semibold text-white mt-4">4. Your Consent</h3>
               <p>By logging in and accepting these policies, you consent to the storage and retrieval of your profile data as described herein.</p>
             </div>
-            <button 
+            <button
               onClick={() => setShowPrivacy(false)}
               className="w-full md:w-32 bg-white text-black py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors mt-4 self-end text-center"
             >
