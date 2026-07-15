@@ -70,6 +70,36 @@ const SNEAK_PEEK_TIERS = [
     ]
   },
   {
+    name: 'Tier 2',
+    label: 'T2',
+    color: '#48D2A0',
+    desc: 'Advanced Dynamic Programming, graph algorithms (shortest path, MST), Tries & LFU caches.',
+    questions: [
+      { title: 'Task Scheduler', topic: 'Heaps / Greedy', difficulty: 'Medium' },
+      { title: 'Longest Increasing Subsequence', topic: 'DP (Subsequences)', difficulty: 'Medium' },
+      { title: 'Dijkstra\'s Algorithm', topic: 'Graphs (Short Path)', difficulty: 'Medium' },
+      { title: 'Trie Implementation & Ops', topic: 'Tries', difficulty: 'Medium' },
+      { title: 'LFU Cache', topic: 'Design / DLL', difficulty: 'Hard' },
+      { title: 'Minimum Window Substring', topic: 'Sliding Window', difficulty: 'Hard' },
+      { title: 'Sudoku Solver', topic: 'Backtracking', difficulty: 'Hard' },
+    ]
+  },
+  {
+    name: 'Tier 1',
+    label: 'T1',
+    color: '#F378A5',
+    desc: 'Multi-dimensional DP, advanced graph theory, segment trees & complex binary search.',
+    questions: [
+      { title: 'Median of Two Sorted Arrays', topic: 'Binary Search', difficulty: 'Hard' },
+      { title: 'Vertical Order Traversal', topic: 'Binary Trees', difficulty: 'Hard' },
+      { title: 'Kosaraju\'s Algorithm', topic: 'Graphs (SCC)', difficulty: 'Hard' },
+      { title: 'Burst Balloons', topic: 'DP (MCM Pattern)', difficulty: 'Hard' },
+      { title: 'Distinct Subsequences', topic: 'DP (Strings)', difficulty: 'Hard' },
+      { title: 'Sum of Distances (Re-rooting)', topic: 'DP on Trees', difficulty: 'Hard' },
+      { title: 'Range Sum Query 2D (Mutable)', topic: 'Segment Tree', difficulty: 'Hard' },
+    ]
+  },
+  {
     name: 'Master',
     label: 'MST',
     color: '#B084E9',
@@ -340,19 +370,19 @@ export default function LandingPage() {
 
             {/* Heading */}
             <h4 className="text-2xl font-black text-white tracking-tight uppercase">TIER-BASED DSA ROADMAPS</h4>
-            <p className="text-neutral-400 text-sm mt-2 mb-6 leading-relaxed max-w-md">
+            <p className="text-neutral-400 text-sm mt-2 mb-6 leading-relaxed max-w-md min-h-[72px] sm:min-h-[48px]">
               {currentPeek.desc}
             </p>
 
             {/* Flat Tab Bar — no background, just border-bottom */}
-            <div className="flex items-center gap-0 border-b border-[#2a2a2a]">
+            <div className="flex items-center gap-0 border-b border-[#2a2a2a] overflow-x-auto whitespace-nowrap scrollbar-none">
               {SNEAK_PEEK_TIERS.map((tier, idx) => {
                 const isActive = autoTierIdx === idx;
                 return (
                   <button
                     key={idx}
                     onClick={() => setAutoTierIdx(idx)}
-                    className="relative px-4 py-2.5 text-[10px] font-bold tracking-widest uppercase transition-all"
+                    className="relative px-4 py-2.5 text-[10px] font-bold tracking-widest uppercase transition-all flex-shrink-0"
                     style={{ color: isActive ? tier.color : '#666' }}
                   >
                     {tier.name}

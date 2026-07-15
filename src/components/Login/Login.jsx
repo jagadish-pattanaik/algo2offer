@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithRedirect } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase/firebase';
 import SEO from '../SEO';
 
@@ -14,8 +14,7 @@ export default function Login() {
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
-      navigate(from, { replace: true });
+      await signInWithRedirect(auth, googleProvider);
     } catch (error) {
       console.error("Google sign in failed:", error);
     }
