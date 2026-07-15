@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase/firebase';
 import SEO from '../SEO';
 
@@ -13,30 +13,41 @@ export default function Login() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
   useEffect(() => {
-    const checkRedirectAuth = async () => {
-      try {
-        const result = await getRedirectResult(auth);
-        
-        if (result?.user) {
-          navigate(from, { replace: true });
-        } else {
+    if (!isLocalhost) {
+      const checkRedirectAuth = async () => {
+        try {
+          const result = await getRedirectResult(auth);
+          
+          if (result?.user) {
+            navigate(from, { replace: true });
+          } else {
+            setIsCheckingAuth(false);
+          }
+        } catch (error) {
+          console.error("Redirect sign-in failed:", error);
           setIsCheckingAuth(false);
         }
-      } catch (error) {
-        console.error("Redirect sign-in failed:", error);
-        setIsCheckingAuth(false);
-      }
-    };
+      };
 
-    checkRedirectAuth();
-  }, [navigate, from]);
+      checkRedirectAuth();
+    } else {
+      setIsCheckingAuth(false);
+    }
+  }, [navigate, from, isLocalhost]);
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithRedirect(auth, googleProvider);
+      if (isLocalhost) {
+        await signInWithPopup(auth, googleProvider);
+        navigate(from, { replace: true });
+      } else {
+        await signInWithRedirect(auth, googleProvider);
+      }
     } catch (error) {
-      console.error("Failed to trigger Google redirect:", error);
+      console.error("Failed to trigger Google login:", error);
     }
   };
 
