@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { signInWithRedirect, getRedirectResult, signInWithPopup } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../../firebase/firebase';
 import SEO from '../SEO';
 
@@ -11,49 +11,15 @@ export default function Login() {
   const from = location.state?.from || '/home';
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-
-  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-
-  useEffect(() => {
-    if (!isLocalhost) {
-      const checkRedirectAuth = async () => {
-        try {
-          const result = await getRedirectResult(auth);
-          
-          if (result?.user) {
-            navigate(from, { replace: true });
-          } else {
-            setIsCheckingAuth(false);
-          }
-        } catch (error) {
-          console.error("Redirect sign-in failed:", error);
-          setIsCheckingAuth(false);
-        }
-      };
-
-      checkRedirectAuth();
-    } else {
-      setIsCheckingAuth(false);
-    }
-  }, [navigate, from, isLocalhost]);
 
   const handleGoogleLogin = async () => {
     try {
-      if (isLocalhost) {
-        await signInWithPopup(auth, googleProvider);
-        navigate(from, { replace: true });
-      } else {
-        await signInWithRedirect(auth, googleProvider);
-      }
+      await signInWithPopup(auth, googleProvider);
+      navigate(from, { replace: true });
     } catch (error) {
-      console.error("Failed to trigger Google login:", error);
+      console.error("Google sign in failed:", error);
     }
   };
-
-  if (isCheckingAuth) {
-    return <div className="min-h-screen bg-[#0E0E0E]" />;
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-[#0E0E0E] text-white font-sans w-full">
